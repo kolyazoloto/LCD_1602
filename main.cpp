@@ -7,11 +7,11 @@
 void i2c_init(){
 	TWBR = 0x20; //vibor chastoti
 }
-void i2c_sendstart(){
+void i2c_start(){
 	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
 	while(!(TWCR & (1<<TWINT)));
 }
-void i2c_sendstop(){
+void i2c_stop(){
 	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);
 }
 
@@ -20,13 +20,25 @@ void i2c_sendbyte(unsigned char byte){
 	TWCR = (1<<TWINT)|(1<<TWEN);
 	while(!(TWCR & (1<<TWINT)));
 }
+unsigned char I2C_ReadByte(void)
+{
+	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWEA);
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+	return TWDR;//читаем регистр данных
+}
+unsigned char I2C_ReadLastByte(void)
+{
+	TWCR = (1<<TWINT)|(1<<TWEN);
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+	return TWDR;//читаем регистр данных
+}
 /////////////////////////////////////////////////
 void byte_out(unsigned char data,unsigned char add){
 	add &= 0xFE; //poslednii bit vsegda nol'
-	i2c_sendstart();
+	i2c_start();
 	i2c_sendbyte(add);
 	i2c_sendbyte(data);
-	i2c_sendstop();
+	i2c_stop();
 }
 void send_command(unsigned char com){
 	com |=0x04;  //E on
