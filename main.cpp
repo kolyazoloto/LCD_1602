@@ -3,35 +3,18 @@
 #include <avr/io.h>
 #include <util/twi.h>
 #include <util/delay.h>
+#include "I2C.cpp"
 #define ADD 0x4E
-void i2c_init(){
-	TWBR = 0x20; //vibor chastoti
-}
-void i2c_start(){
-	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
-	while(!(TWCR & (1<<TWINT)));
-}
-void i2c_stop(){
-	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);
-}
 
-void i2c_sendbyte(unsigned char byte){
-	TWDR = byte;
-	TWCR = (1<<TWINT)|(1<<TWEN);
-	while(!(TWCR & (1<<TWINT)));
-}
-unsigned char I2C_ReadByte(void)
-{
-	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWEA);
-	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
-	return TWDR;//читаем регистр данных
-}
-unsigned char I2C_ReadLastByte(void)
-{
-	TWCR = (1<<TWINT)|(1<<TWEN);
-	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
-	return TWDR;//читаем регистр данных
-}
+/*class LCD_1602_I2C{
+public:
+	LCD_1602_I2C(unsigned char i2c_add){
+		
+	}
+private:
+
+	};*/
+
 /////////////////////////////////////////////////
 void byte_out(unsigned char data,unsigned char add){
 	add &= 0xFE; //poslednii bit vsegda nol'
@@ -100,7 +83,7 @@ int main(void)
 	
 	i2c_init();
 	init_1602();
-	str_out("ti kak");
+	str_out("aasfa");
     while (1) 
     {
 	
