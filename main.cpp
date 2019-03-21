@@ -29,9 +29,9 @@ void byte_out(unsigned char data,unsigned char add){
 	i2c_sendstop();
 }
 void send_command(unsigned char com){
-	com |=0x04;  //E v edinicu
+	com |=0x04;  //E on
 	byte_out(com,ADD);
-	com &= 0xFB; // E v nol
+	com &= 0xFB; // E off
 	byte_out(com,ADD);
 }
 void init_1602(void){
@@ -63,13 +63,13 @@ void char_out(unsigned char data){
 	unsigned char data_h = ((data & 0xF0) + 0x09);//berem pol byte verhnee i dobavlyaem komandu
 	unsigned char data_l = (((data<<4)& 0xF0) + 0x09); //berem pol byte nijnee i dobavlyaem komandu
 	
-	byte_out(data_h,ADD); //peredaem starshie biti
+ //peredaem starshie biti
 	data_h |= 0x04; //E on
 	byte_out(data_h,ADD);
 	data_h &= 0xF9; //E off
 	byte_out(data_h,ADD);
 	
-	byte_out(data_l,ADD); //peredaem mladshie biti
+//peredaem mladshie biti
 	data_l |= 0x04; //E on
 	byte_out(data_l,ADD);
 	data_l &= 0xF9; //E off
@@ -88,7 +88,7 @@ int main(void)
 	
 	i2c_init();
 	init_1602();
-	str_out("alo psina???");
+	str_out("ti kak");
     while (1) 
     {
 	
