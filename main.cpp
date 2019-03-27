@@ -4,7 +4,7 @@
 int main(void)
 {	
 	LCD_1602_I2C hi;
-	hi.print("ti kto");
+	hi.print("ghb");
     while (1) {
 		
 	}

@@ -1,5 +1,5 @@
 ﻿#ifndef I2C_H_
-#define I2C_H
+#define I2C_H_
 #include "main.h"
 void i2c_init(){
 	TWBR = 0x20; //vibor chastoti
