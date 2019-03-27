@@ -1,6 +1,7 @@
 #ifndef LCD_1602_H_
 #define LCD_1602_H_
 #include "main.h"
+#include "I2C.h"
 class LCD_1602_I2C{
 	public:
 	LCD_1602_I2C(unsigned char add=0x4E){
