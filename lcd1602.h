@@ -1,7 +1,7 @@
 #ifndef LCD_1602_H_
 #define LCD_1602_H_
 #include "main.h"
-#include "I2C.h"
+//#include "I2C.h"
 class LCD_1602_I2C{
 	public:
 	LCD_1602_I2C(unsigned char add=0x4E){
@@ -9,11 +9,11 @@ class LCD_1602_I2C{
 		i2c_init();
 		lcd_init();
 	}
-	void print_str(char *str)
+	void print(char *str)
 	{
 		while((*str) != '\0')
 		{
-			print_char(*str);
+			print(*str);
 			str++;
 		}
 	}
@@ -32,7 +32,7 @@ class LCD_1602_I2C{
 		send_command(data_l);
 		_delay_us(40);
 	}
-	void print_char(unsigned char data){
+	void print(unsigned char data){
 		unsigned char data_h = ((data & 0xF0) + 0x09);//berem pol byte verhnee i dobavlyaem komandu
 		unsigned char data_l = (((data<<4)& 0xF0) + 0x09); //berem pol byte nijnee i dobavlyaem komandu
 		//peredaem starshie biti

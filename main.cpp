@@ -3,8 +3,8 @@
 
 int main(void)
 {	
-	LCD_1602_I2C hi(0x4E);
-	hi.print_str("kolya");
+	LCD_1602_I2C hi;
+	hi.print("ti kto");
     while (1) {
 		
 	}
