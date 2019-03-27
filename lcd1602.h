@@ -1,4 +1,6 @@
-
+#ifndef LCD_1602_H_
+#define LCD_1602_H_
+#include "main.h"
 class LCD_1602_I2C{
 	public:
 	LCD_1602_I2C(unsigned char add=0x4E){
@@ -79,3 +81,4 @@ class LCD_1602_I2C{
 
 	unsigned char i2c_add;
 };
+#endif /* LCD_1602_H_ */

@@ -1,4 +1,7 @@
-﻿void i2c_init(){
+﻿#ifndef I2C_H_
+#define I2C_H
+#include "main.h"
+void i2c_init(){
 	TWBR = 0x20; //vibor chastoti
 }
 void i2c_start(){
@@ -26,3 +29,5 @@ unsigned char I2C_ReadLastByte(void)
 	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
 	return TWDR;//читаем регистр данных
 }
+
+#endif /* I2C_H_ */
